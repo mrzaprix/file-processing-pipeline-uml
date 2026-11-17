@@ -62,11 +62,11 @@
   `FilePayload.isFailed()` и выполнение прерывается.
 
 ## Структура репозитория
----README.md
----docs/
---- - class-diagram.png # экспорт UML-диаграммы
---- - class-diagram.puml # исходник модели (PlantUML)
---- .gitignore
+- --- README.md
+- --- docs/
+- ---  - class-diagram.png # экспорт UML-диаграммы
+- ---  - class-diagram.puml # исходник модели (PlantUML)
+- --- .gitignore
 
 Папка `src/` отсутствует намеренно: в рамках этой работы PHP-код не реализуется,
 модель служит основой для будущей реализации.
