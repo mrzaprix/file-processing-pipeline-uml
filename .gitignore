@@ -1,0 +1,10 @@
+# Временные файлы и папки
+.DS_Store
+Thumbs.db
+
+# Файлы IDE
+.idea/
+.vscode/
+
+# Файлы проекта StarUML 
+*.mdj
