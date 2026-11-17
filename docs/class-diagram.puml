@@ -1,0 +1,62 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class FilePayload {
+  - originalName: string
+  - extension: string
+  - mimeType: string
+  - size: int
+  - tempPath: string
+  - safeName: string
+  - savedPath: string
+  - status: string
+  - errorMessage: string
+  + getExtension(): string
+  + setMimeType(string): void
+  + setSize(int): void
+  + setSafeName(string): void
+  + markAsFailed(string): void
+  + isFailed(): bool
+}
+
+interface PipeInterface {
+  + process(FilePayload, Pipeline): void
+}
+
+class Pipeline {
+  - pipes: PipeInterface[]
+  + addPipe(PipeInterface): void
+  + removePipe(string): void
+  + reorder(string[]): void
+  + process(FilePayload): FilePayload
+}
+
+abstract class AbstractPipe {
+  # fail(string): void
+}
+
+class UploadPipe
+class ExtensionCheckPipe
+class MimeTypeCheckPipe
+class SizeCheckPipe
+class AntivirusCheckPipe
+class GenerateNamePipe
+class SaveFilePipe
+class RegisterResultPipe
+
+PipeInterface <|.. AbstractPipe
+AbstractPipe <|-- UploadPipe
+AbstractPipe <|-- ExtensionCheckPipe
+AbstractPipe <|-- MimeTypeCheckPipe
+AbstractPipe <|-- SizeCheckPipe
+AbstractPipe <|-- AntivirusCheckPipe
+AbstractPipe <|-- GenerateNamePipe
+AbstractPipe <|-- SaveFilePipe
+AbstractPipe <|-- RegisterResultPipe
+
+Pipeline o-- "0..*" PipeInterface : contains
+Pipeline --> FilePayload : manages
+PipeInterface ..> FilePayload : receives / mutates
+PipeInterface ..> Pipeline : can stop / delegate
+
+@enduml
